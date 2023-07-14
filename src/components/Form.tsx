@@ -1,4 +1,8 @@
-function Forms() {
+type FormProps = {
+  onCancel: () => void;
+};
+
+function Form({ onCancel }: FormProps) {
   return (
     <form>
       <label htmlFor="serviceName">
@@ -18,8 +22,8 @@ function Forms() {
         <input type="text" name="URL" id="URL" />
       </label>
       <button>Cadastrar</button>
-      <button>Cancelar</button>
+      <button onClick={ onCancel }>Cancelar</button>
     </form>
   );
 }
-export default Forms;
+export default Form;
