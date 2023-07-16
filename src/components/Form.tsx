@@ -26,17 +26,17 @@ function Form({ onCancel }: FormProps) {
     setPassword(event.target.value);
     formValidator();
   };
-
+  const validPassword = 'valid-password-check';
+  const invalidPssword = 'invalid-password-check';
+  const nameValidator = service.length !== 0;
+  const loginValidator = login.length !== 0;
+  const minPassword = password.length >= 8;
+  const maxPassword = password.length <= 16;
+  const letters = /[a-zA-Z]/.test(password) && /\d/.test(password);
+  const specialCharacter = /[!@#$%^&*]/.test(password);
   const formValidator = () => {
-    const nameValidator = service.length !== 0;
-    const loginValidator = login.length !== 0;
-    const passwordValidator = password.length >= 8
-      && password.length <= 16
-      && /[a-zA-Z]/.test(password)
-      && /\d/.test(password)
-      && /[!@#$%^&*]/.test(password);
-
-    setValidForm(nameValidator && loginValidator && passwordValidator);
+    setValidForm(nameValidator && loginValidator && minPassword && maxPassword
+      && letters && specialCharacter);
   };
 
   return (
@@ -71,6 +71,36 @@ function Form({ onCancel }: FormProps) {
           onChange={ handlePassword }
         />
       </label>
+      <div>
+        <p
+          className={
+            minPassword ? validPassword : invalidPssword
+         }
+        >
+          Possuir 8 ou mais caracteres
+        </p>
+        <p
+          className={
+            maxPassword ? validPassword : invalidPssword
+         }
+        >
+          Possuir até 16 caracteres
+        </p>
+        <p
+          className={
+            letters ? validPassword : invalidPssword
+         }
+        >
+          Possuir letras e números
+        </p>
+        <p
+          className={
+            specialCharacter ? validPassword : invalidPssword
+         }
+        >
+          Possuir algum caractere especial
+        </p>
+      </div>
       <label htmlFor="URL">
         URL
         <input type="text" name="URL" id="URL" />
