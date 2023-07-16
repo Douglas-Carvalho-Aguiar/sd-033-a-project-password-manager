@@ -26,6 +26,7 @@ function Form({ onCancel }: FormProps) {
     setPassword(event.target.value);
     formValidator();
   };
+
   const validPassword = 'valid-password-check';
   const invalidPssword = 'invalid-password-check';
   const nameValidator = service.length !== 0;
