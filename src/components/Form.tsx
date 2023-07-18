@@ -65,6 +65,12 @@ function Form({ onCancel }: FormProps) {
     setForm(false);
   };
 
+  const handleRemove = (index: number) => {
+    const removeService = [...services];
+    removeService.splice(index, 1);
+    setServices(removeService);
+  };
+
   const validPassword = 'valid-password-check';
   const invalidPssword = 'invalid-password-check';
   const nameValidator = serviceName.length !== 0;
@@ -165,6 +171,12 @@ function Form({ onCancel }: FormProps) {
                 </a>
                 <p>{element.login}</p>
                 <p>{element.password}</p>
+                <button
+                  data-testid="remove-btn"
+                  onClick={ handleRemove }
+                >
+                  Excluir serviço
+                </button>
               </li>
             ))}
           </ul>
